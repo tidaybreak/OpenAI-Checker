@@ -63,3 +63,13 @@ else
 	fi
 	echo "-------------------------------------"
 fi
+
+echo -e "[CHECK chatgpt.com]"
+INFO=$(curl -sS  'https://chatgpt.com/' --max-time 3 --insecure  --compressed -I)
+if [[ "$INFO" == "" ]]; then
+	echo -e "${RED}Network is unreachable or reset by peer${PLAIN}"
+elif [[ $(echo $INFO | grep "Accept-CH") == "" ]]; then
+	echo -e "${RED}Your IP is BLOCKED BY chatgpt.com!${PLAIN}"
+else 
+	echo -e "${GREEN}IP supports access to chatgpt.com.${PLAIN}" 
+fi
